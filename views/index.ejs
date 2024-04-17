@@ -5,8 +5,9 @@
 
 <section class="home-content">
     <% items.forEach(function(item) { %>
-        <a href="/detail/<%= item.id %>"><article class="home-items" style="background-image: url('https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>');">
-        </article></a>
+        <a href="/detail/<%= item.id %>">
+                <img class="home-items" src='https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>' width="300" height="500">
+        </a>
     <% }) %>
 </section>
 <!--einde main-->

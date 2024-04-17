@@ -12,12 +12,12 @@
     --font-size-small: 1em;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--font-family);
-}
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*    font-family: var(--font-family);*/
+/*}*/
 
 /*components*/
 ul {
@@ -68,6 +68,7 @@ h3 {
 p, button {
     font-size: var(--font-size-text);
 }
+
 
 
 

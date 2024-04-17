@@ -1,18 +1,4 @@
-/* Partials header*/
-nav {
-    padding: 0.5em;
-    display: flex;
-    justify-content: space-between;
-}
 
-nav img {
-
-}
-
-nav button{
-    border: none;
-    background-color: var(--main-color);
-}
 
 a {
   margin: auto;
@@ -58,14 +44,13 @@ a {
     height: 29em; /* Verminder de padding */
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2);
     width: 20em;
-
     background-size: 100% auto; /* 100% breedte, automatische hoogte */
     background-repeat: no-repeat; /* Voorkomt dat de achtergrondafbeelding herhaalt */
     background-position: center; /* Plaatst de achtergrondafbeelding in het midden van het element */
 }
 
 .home-items:hover {
-    scale: 1.15;
+    scale: 1.05;
     transform: translateY(-0.5em);
     transition: 0.2s ease-in-out;
 }
@@ -74,8 +59,6 @@ a {
     display: block;
     width: 100%;
 }
-
-
 
 /*Detail pagina*/
 
