@@ -1,0 +1,43 @@
+<%- include('./partials/header') %>
+
+<div class="personal-page-wrapper">
+    <h2>Welkom *Gebruiker* dit is jou persoonlijke pagina</h2>
+
+    <h2>Aanbevolen voor jou</h2>
+
+<h3>Boeken</h3>
+<section class="scroll-carousel">
+
+    <% items.forEach(function(item) { %>
+        <article class="item">
+            <h2 hidden="hidden"> <%= item.title %></h2>
+            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>">
+            <a href="/detail/<%= item.id %>"></a>
+        </article>
+    <% }) %>
+</section>
+
+<h3>CD's</h3>
+<section class="scroll-carousel">
+
+    <% items.forEach(function(item) { %>
+        <article class="item">
+            <h2 hidden="hidden"> <%= item.title %></h2>
+            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>">
+            <a href="/detail/<%= item.id %>"></a>
+        </article>
+    <% }) %>
+</section>
+
+<h3>Activiteiten</h3>
+<section class="scroll-carousel">
+
+    <% items.forEach(function(item) { %>
+        <article class="item">
+            <h2 hidden="hidden"> <%= item.title %></h2>
+            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>">
+            <a href="/detail/<%= item.id %>"></a>
+        </article>
+    <% }) %>
+</section>
+</div>

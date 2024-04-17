@@ -1,0 +1,160 @@
+<%- include('./partials/header') %>
+<div class="details-grid-container">
+    <img src="https://fdnd-agency.directus.app/assets/<%= items.afbeelding %>" alt="Boek">
+    <article class="description">
+        <h2>Omschrijving</h2>
+        <hr class="horizontal-line">
+        <%- items.description %>
+    </article>
+    <button class="details-button">Details</button>
+    <article class="details">
+        <div class="book-details">
+            <p><strong>Uitgever:</strong> <%= items.publisher %></p>
+            <p><strong>Auteur:</strong> <%= items.auteur %></p>
+            <p><strong>Genre:</strong> <%= items.genre %></p>
+            <p><strong>Taal:</strong> <%= items.language %></p>
+            <p><strong>Editie:</strong> <%= items.editie %></p>
+            <p><strong>Prijs:</strong> <%= items.price %></p>
+            <p><strong>ISBN Nummer:</strong> <%= items.ISBN %></p>
+        </div>
+        <div class="cd-details">
+            <p><strong>Uitgever:</strong> <%= items.publisher %></p>
+            <p><strong>Auteur:</strong> <%= items.auteur %></p>
+            <p><strong>Genre:</strong> <%= items.genre %></p>
+            <p><strong>Taal:</strong> <%= items.language %></p>
+            <p><strong>Editie:</strong> <%= items.editie %></p>
+            <p><strong>Prijs:</strong> <%= items.price %></p>
+        </div>
+        <div class="activity-details">
+            <p><strong>Datum en tijd:</strong> <%= items.datetime %></p>
+            <p><strong>Locatie:</strong> <%= items.location %></p>
+            <p><strong>Prijs:</strong> <%= items.price %></p>
+        </div>
+        <div class="empty-details">
+            <p><strong>Er is helaas geen informatie beschikbaar...</strong></p>
+        </div>
+    </article>
+
+    <section class="reviews">
+        <h2>Recenties</h2>
+        <article class="review-item">
+            <ul>
+                <% reviews.forEach(review => { %>
+                    <li><strong><%= review.name %>:</strong> <%= review.message %></li>
+                <% }) %>
+            </ul>
+        </article>
+        <button id="toggle-review">Plaats recentie</button>
+    </section>
+
+    <div id="review-pop-up">
+        <form id="review-form" action="/submit-review" method="POST">
+            <h2>Plaats een recentie</h2>
+            <label for="review-name">Naam:</label>
+            <input id="review-name" type="text" name="name" placeholder="Voer hier uw naam in" required>
+            <label for="review-message">Bericht:</label>
+            <textarea id="review-message" name="message" placeholder="Typ hier uw bericht" required></textarea>
+            <button id="review-submit" type="submit">Plaats recentie</button>
+        </form>
+    </div>
+
+</div>
+<%- include('./partials/footer') %>
+
+<script>
+    document.documentElement.classList.add('js');
+
+    const detailsButton = document.querySelector('.details-button');
+    const details = document.querySelector('.details');
+    let detailsCheck = false;
+    let type = '<%= items.item_type %>';
+    const bookDetails = document.querySelector('.book-details');
+    const cdDetails = document.querySelector('.cd-details');
+    const activityDetails = document.querySelector('.activity-details');
+    const emptyDetails = document.querySelector('.empty-details');
+
+    detailsButton.addEventListener('click', function () {
+        if (detailsCheck === false) {
+            detailsActive();
+            show();
+        } else {
+            detailsNonActive();
+        }
+    });
+
+    function detailsActive() {
+        detailsCheck = true;
+        details.classList.add('details-active');
+    }
+
+    function detailsNonActive() {
+        detailsCheck = false;
+        details.classList.remove('details-active');
+    }
+
+    function show() {
+        if (type === 'book') {
+            bookDetails.style.display = 'block';
+        } else if (type === 'cd') {
+            cdDetails.style.display = 'block';
+        } else if (type === 'activity') {
+            activityDetails.style.display = 'block';
+        } else {
+            emptyDetails.style.display = 'block';
+        }
+    }
+
+    // review function op detail pagina
+    const toggleReviewButton = document.getElementById('toggle-review');
+    const reviewPopUp = document.getElementById('review-pop-up');
+
+
+    toggleReviewButton.addEventListener('click', function () {
+        reviewActive();
+        console.log('click')
+    })
+
+    function reviewActive() {
+
+        // Controleer of de browser de style.display eigenschap ondersteunt
+        if (typeof reviewPopUp.style.display === 'undefined') {
+            // Voeg de CSS-klasse toe om het pop-upvenster weer te geven
+            reviewPopUp.classList.remove('js');
+        } else {
+            // Gebruik de standaardmethode om het pop-upvenster weer te geven
+            reviewPopUp.style.display = 'block';
+        }
+
+
+    }
+
+    //form
+    document.getElementById('review-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Voorkom standaardgedrag van het formulier (pagina vernieuwen)
+
+        // Verzend de recentiegegevens naar de server met een POST-verzoek
+        fetch('/submit-review', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: document.getElementById('review-name').value,
+                message: document.getElementById('review-message').value
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Als de recentie succesvol is toegevoegd, herlaad dan de pagina
+                    window.location.reload();
+                } else {
+                    // Als er een fout optreedt, geef dan een foutmelding weer
+                    alert('Er is een fout opgetreden bij het toevoegen van de recentie.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+

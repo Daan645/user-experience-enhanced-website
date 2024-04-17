@@ -1,0 +1,17 @@
+<%- include('./partials/header') %>
+
+<!--begin main-->
+<!--content-->
+
+<section class="home-content">
+    <% items.forEach(function(item) { %>
+        <a href="/detail/<%= item.id %>"><article class="home-items" style="background-image: url('https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>');">
+        </article></a>
+    <% }) %>
+</section>
+<!--einde main-->
+<%- include('./partials/footer') %>
+
+<script>
+    let pagina = 'Home';
+</script>
