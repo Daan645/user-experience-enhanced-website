@@ -1,0 +1,18 @@
+<nav aria-label="Breadcrumb">
+    <ul id="breadcrumb-list">
+    </ul>
+</nav>
+
+<script>
+    // Controleer of er een vorige pagina is opgeslagen in de sessie
+    if (sessionStorage.previousPage) {
+        // Voeg de vorige pagina toe aan de breadcrumb
+        var breadcrumbList = document.getElementById("breadcrumb-list");
+        var previousPage = sessionStorage.previousPage;
+        var previousPageName = previousPage.substring(previousPage.lastIndexOf('/') + 1); // Haal de paginanaam uit de URL
+        breadcrumbList.innerHTML += `<li><a href="${previousPage}">${previousPageName}</a></li>`;
+    }
+
+    // Sla de huidige pagina op in de sessie voor gebruik op de volgende pagina
+    sessionStorage.previousPage = window.location.href;
+</script>
