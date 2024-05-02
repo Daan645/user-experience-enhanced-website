@@ -17,6 +17,9 @@ const profiles = apiUrl + '/oba_profile'
 // Maak een nieuwe express app aan
 const app = express()
 
+
+
+
 // Stel ejs in als template engine
 // View engine zorgt ervoor dat data die je ophaalt uit de api , waar je in je code dingen mee doet, daar html van maakt
 app.set('view engine', 'ejs')
@@ -34,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 let reviews = [];
+let bookmarkedItems = [];
 
 //routes
 // index GET route
@@ -66,7 +70,43 @@ app.get('/detail/:id', function (request, response) {
     });
 });
 
-// post
+// Route die de andere pagina bedient
+
+// Route die de andere pagina bedient
+app.get('/bookmarks', function (request, response) {
+    fetchJson(items).then((items) => {
+        // apiData bevat gegevens van alle personen uit alle squads
+        // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
+        // Stap 3
+        // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
+
+        // Stap 4
+        // HTML maken op basis van JSON data
+        response.render('bookmarks', {
+            items: items.data,
+            bookmarkedItems: bookmarkedItems
+        });
+    })
+})
+
+
+// app.get('/bookmarks', function (request, response) {
+//     fetchJson(items).then((items) => {
+//         // apiData bevat gegevens van alle personen uit alle squads
+//         // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
+//         // Stap 3
+//         // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
+//
+//         // Stap 4
+//         // HTML maken op basis van JSON data
+//         response.render('bookmarks', {
+//             items: items.data,
+//             bookmarkedItems: bookmarkedItems
+//         });
+//     })
+// })
+
+// post review
 app.post('/submit-review', function(req, res) {
     try {
         // Haal de ingediende recentiegegevens op uit het formulier
@@ -82,6 +122,37 @@ app.post('/submit-review', function(req, res) {
         res.status(500).send('Er is een interne serverfout opgetreden bij het verwerken van het recentieformulier.');
     }
 });
+
+// post bookmark
+
+// post
+app.post('/save-bookmark', (req, res) => {
+    const itemId = req.body.itemId;
+
+    // Controleer of het itemId al in de bookmarkedItems-array zit
+    const index = bookmarkedItems.indexOf(itemId);
+    if (index !== -1) {
+        // Als het itemId al in de array zit, verwijder het dan
+        bookmarkedItems.splice(index, 1);
+        console.log('Item removed from bookmarks:', itemId);
+        res.send('Item removed from bookmarks!');
+    } else {
+        // Als het itemId niet in de array zit, voeg het dan toe
+        bookmarkedItems.push(itemId);
+        console.log('Item bookmarked:', itemId);
+        res.send('Item bookmarked!');
+    }
+});
+
+
+
+// app.post('/save-bookmark', (req, res) => {
+//     const itemId = req.body.itemId;
+//     bookmarkedItems.push(itemId);
+//     console.log('Item bookmarked:', itemId);
+//
+//     res.send('Item bookmarked!');
+// });
 
 
 // chooseprofile GET route

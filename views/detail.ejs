@@ -1,22 +1,22 @@
 <%- include('./partials/header') %>
-<nav aria-label="Breadcrumb">
-    <ul id="breadcrumb-list">
-    </ul>
-</nav>
+<!--<nav aria-label="Breadcrumb">-->
+<!--    <ul id="breadcrumb-list">-->
+<!--    </ul>-->
+<!--</nav>-->
 
-<script>
-    // Controleer of er een vorige pagina is opgeslagen in de sessie
-    if (sessionStorage.previousPage) {
-        // Voeg de vorige pagina toe aan de breadcrumb
-        var breadcrumbList = document.getElementById("breadcrumb-list");
-        var previousPage = sessionStorage.previousPage;
-        var previousPageName = previousPage.substring(previousPage.lastIndexOf('/') + 1); // Haal de paginanaam uit de URL
-        breadcrumbList.innerHTML += `<li><a href="${previousPage}">${previousPageName}</a></li>`;
-    }
+<!--<script>-->
+<!--    // Controleer of er een vorige pagina is opgeslagen in de sessie-->
+<!--    if (sessionStorage.previousPage) {-->
+<!--        // Voeg de vorige pagina toe aan de breadcrumb-->
+<!--        var breadcrumbList = document.getElementById("breadcrumb-list");-->
+<!--        var previousPage = sessionStorage.previousPage;-->
+<!--        var previousPageName = previousPage.substring(previousPage.lastIndexOf('/') + 1); // Haal de paginanaam uit de URL-->
+<!--        breadcrumbList.innerHTML += `<li><a href="${previousPage}">${previousPageName}</a></li>`;-->
+<!--    }-->
 
-    // Sla de huidige pagina op in de sessie voor gebruik op de volgende pagina
-    sessionStorage.previousPage = window.location.href;
-</script>
+<!--    // Sla de huidige pagina op in de sessie voor gebruik op de volgende pagina-->
+<!--    sessionStorage.previousPage = window.location.href;-->
+<!--</script>-->
 <div class="details-grid-container">
     <img src="https://fdnd-agency.directus.app/assets/<%= items.afbeelding %>" alt="Boek">
     <article class="description">
@@ -77,6 +77,18 @@
     </div>
 
 </div>
+
+<form class="bookmark" action="/save-bookmark" method="POST">
+    <!-- Verborgen inputveld om het item-id mee te sturen -->
+    <input type="hidden" name="itemId" value="<%= items.id %>">
+
+    <button id="bookmarkSubmit" type="submit">
+        <svg id="bookmark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50">
+            <path d="M19 3h-14c-1.1 0-2 .9-2 2v14l8-4.67 8 4.67v-14c0-1.1-.9-2-2-2z"/>
+        </svg>
+    </button>
+</form>
+
 <%- include('./partials/footer') %>
 
 <script>
