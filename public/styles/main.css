@@ -1,10 +1,27 @@
+@font-face {
+    font-family: AvenirRoman;
+    src: url(../font/Avenir-roman.ttf);
+}
+
+@font-face {
+    font-family: AvenirMedium;
+    src: url(../font/Avenir-medium.ttf);
+}
+
+@font-face {
+    font-family: AvenirBlack;
+    src: url(../font/Avenir\ -black.ttf);
+}
+
+
 :root{
 /*kleuren*/
     --main-color: #ffff;
     --secondary-color: #e30613;
     --tertairy-color: black;
     /*font*/
-    --font-family: sans-serif;
+    --font-family: AvenirMedium;
+;
     --font-size-h1: 2em;
     --font-size-h2: 1.5em;
     --font-size-h3: 1.3em;
@@ -18,7 +35,9 @@
 /*    box-sizing: border-box;*/
 /*    font-family: var(--font-family);*/
 /*}*/
-
+body {
+    font-family: var(--font-family);
+}
 /*components*/
 ul {
     list-style-type: none;
@@ -47,10 +66,12 @@ button:hover {
     transform: scale(1.1) ;
 }
 
-button:focus {
+/* Focusstijl alleen wanneer gefocust met toetsenbord */
+button:focus:not(:active) {
     outline: 3px solid red; /* Rode omlijning bij focus */
     outline-offset: 5px;
 }
+
 
 /*fonts*/
 h1 {

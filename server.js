@@ -17,9 +17,6 @@ const profiles = apiUrl + '/oba_profile'
 // Maak een nieuwe express app aan
 const app = express()
 
-
-
-
 // Stel ejs in als template engine
 // View engine zorgt ervoor dat data die je ophaalt uit de api , waar je in je code dingen mee doet, daar html van maakt
 app.set('view engine', 'ejs')
@@ -38,6 +35,7 @@ app.use(express.json());
 
 let reviews = [];
 let bookmarkedItems = [];
+let id = '';
 
 //routes
 // index GET route
@@ -55,20 +53,48 @@ app.get('/', function (request, response) {
     })
 })
 
+// // Details GET route
+// app.get('/detail/:id', function (request, response) {
+//
+//
+//     // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
+//     fetchJson(apiUrl + '/oba_item/' + request.params.id).then((items) => {
+//         // Plaats de console.log hier om de items te bekijken
+//         console.log(items);
+//         id = request.params.id
+//
+//         // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
+//         response.render('detail', {
+//             items: items.data,
+//             reviews: reviews,
+//             id: id,
+//             bookmarkedItems: bookmarkedItems
+//
+//         });
+//     });
+// });
+
+
 // Details GET route
 app.get('/detail/:id', function (request, response) {
-    // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
-    fetchJson(apiUrl + '/oba_item/' + request.params.id).then((items) => {
-        // Plaats de console.log hier om de items te bekijken
-        console.log(items);
+    // Haal het ID op uit request params
+    const itemId = request.params.id;
 
-        // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
+    // Controleer of het itemId in de bookmarkedItems array zit
+    const isBookmarked = bookmarkedItems.includes(itemId);
+
+    // Haal de details op van het item met het opgegeven ID
+    fetchJson(apiUrl + '/oba_item/' + itemId).then((items) => {
+        // Render de detailpagina en geef de nodige data mee
         response.render('detail', {
             items: items.data,
-            reviews: reviews
+            reviews: reviews,
+            id: itemId,
+            bookmarked: isBookmarked // Voeg de variabele isBookmarked toe aan de render opties
         });
     });
 });
+
 
 // Route die de andere pagina bedient
 
@@ -135,12 +161,12 @@ app.post('/save-bookmark', (req, res) => {
         // Als het itemId al in de array zit, verwijder het dan
         bookmarkedItems.splice(index, 1);
         console.log('Item removed from bookmarks:', itemId);
-        res.send('Item removed from bookmarks!');
+
     } else {
         // Als het itemId niet in de array zit, voeg het dan toe
         bookmarkedItems.push(itemId);
         console.log('Item bookmarked:', itemId);
-        res.send('Item bookmarked!');
+
     }
 });
 

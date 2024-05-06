@@ -82,13 +82,16 @@
     <!-- Verborgen inputveld om het item-id mee te sturen -->
     <input type="hidden" name="itemId" value="<%= items.id %>">
 
-    <button id="bookmarkSubmit" type="submit">
-        <svg id="bookmark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50">
+    <button id="bookmarkSubmit" class="bookmarkButton <%= bookmarked ? 'bookmark-icon' : 'bookmarkChecked check-icon-bookmark-checked' %>">
+        <svg class="bookmark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50">
             <path d="M19 3h-14c-1.1 0-2 .9-2 2v14l8-4.67 8 4.67v-14c0-1.1-.9-2-2-2z"/>
         </svg>
+        <svg class="check-icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M9 16.2l-3.5-3.5c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4.2 4.2c.2.2.4.3.7.3s.5-.1.7-.3l8.5-8.5c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-7.8 7.8z"/>
+        </svg>
+
     </button>
 </form>
-
 <%- include('./partials/footer') %>
 
 <script>
@@ -186,5 +189,31 @@
                 console.error('Error:', error);
             });
     });
+
+    // functie voor bookmark transition
+    bookmarkButton = document.querySelector('.bookmarkButton');
+    bookmarkIcon = document.querySelector('.bookmark-icon');
+    checkIcon = document.querySelector('.check-icon-bookmark');
+
+
+    bookmarkButton.addEventListener('click', function () {
+        checkBookmark()
+        console.log('ik ben geklikt');
+    });
+
+    function checkBookmark() {
+        bookmarkButton.classList.toggle('bookmarkChecked');
+        bookmarkIcon.classList.toggle('bookmark-icon-checked');
+        checkIcon.classList.toggle('check-icon-bookmark-checked');
+        console.log('de functie werkt');
+    }
+
+
+
+
+
+
+
+
 </script>
 

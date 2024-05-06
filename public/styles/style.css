@@ -194,37 +194,70 @@ a {
 }
 
 
-    .bookmark {
+    .bookmarkButton {
         position: fixed;
         bottom: 20px; /* Pas deze waarde aan naar wens voor de verticale afstand vanaf de onderkant */
         right: 20px; /* Pas deze waarde aan naar wens voor de horizontale afstand vanaf de rechterkant */
         display: flex;
         align-items: center;
         justify-content: center;
-
-
         z-index: 999; /* Zorg ervoor dat het boven andere elementen wordt weergegeven */
-
-    }
-
-#bookmarkSubmit {
         border-radius: 3em;
-        width: 5em;
-        height: 5em;
+        width: 4em;
+        height: 4em;
         background-color: var(--main-color);
+
+
     }
 
+    .bookmarkChecked {
+        background-color: red;
+        animation: bookmarkSaveAnimation 1s ease-out;
 
+    }
 
-#bookmark-icon {
-    margin-top: 0.3em;
-    margin-left: 0.1em;
+.bookmark-icon {
+    margin-top: 0.4em;
+    margin-left: 0.2em;
+    width: 3em;
     fill: var(--secondary-color);
+}
+
+.bookmark-icon-checked {
+    display: none;
+}
+
+.check-icon-bookmark {
+    display: none;
+}
+
+.check-icon-bookmark-checked {
+    display: block;
+    fill: var(--main-color);
+    margin-bottom: 0.2em;
+    width: 4em;
+    height: 3em;
+    color: var(--primary-color);
 }
 
 #bookmarkSubmit:hover {
     scale: 1.2;
     transition: 0.2s ease-in-out;
+}
+
+/*animatie wanneer bookmark gesaved wordt*/
+@keyframes bookmarkSaveAnimation {
+    0% {
+      scale: 0.2;
+    }
+
+    50% {
+        scale: 2;
+    }
+
+    100% {
+scale: 1;
+    }
 }
 
 /* profile page*/
@@ -274,10 +307,8 @@ a {
 }
 
 .chooseProfile:hover img{
-
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     transition: 0.2s ease-in-out;
-
 }
 
 
