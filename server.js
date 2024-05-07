@@ -95,6 +95,25 @@ app.get('/detail/:id', function (request, response) {
     });
 });
 
+// Details GET route
+// app.get('/detail/:id', async function (request, response) {
+//     try {
+//         const itemId = request.params.id;
+//         const isBookmarked = bookmarkedItems.includes(itemId);
+//         const items = await fetchJson(apiUrl + '/oba_item/' + itemId);
+//         response.render('detail', {
+//             items: items.data,
+//             reviews: reviews,
+//             id: itemId,
+//             bookmarked: isBookmarked
+//         });
+//     } catch (error) {
+//         console.error(error);
+//         response.status(500).send('Error fetching data');
+//     }
+// });
+
+
 
 // Route die de andere pagina bedient
 

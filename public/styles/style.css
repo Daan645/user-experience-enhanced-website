@@ -205,9 +205,10 @@ a {
         border-radius: 3em;
         width: 4em;
         height: 4em;
+    }
+
+    .bookmark-unchecked {
         background-color: var(--main-color);
-
-
     }
 
     .bookmarkChecked {
@@ -223,22 +224,33 @@ a {
     fill: var(--secondary-color);
 }
 
+.check {
+    display: block;
+}
+
+.unchecked {
+    display: none;
+}
+
 .bookmark-icon-checked {
     display: none;
 }
 
 .check-icon-bookmark {
-    display: none;
-}
-
-.check-icon-bookmark-checked {
-    display: block;
     fill: var(--main-color);
     margin-bottom: 0.2em;
     width: 4em;
     height: 3em;
     color: var(--primary-color);
 }
+
+
+    .bookmark-icon-checked {
+
+        animation: bookmarkSaveAnimation 2s ease-out; /* Animatie toegepast op gecontroleerd pictogram */
+    }
+
+
 
 #bookmarkSubmit:hover {
     scale: 1.2;
