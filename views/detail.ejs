@@ -192,8 +192,8 @@
 
     // functie voor bookmark transition
     bookmarkButton = document.querySelector('#bookmarkSubmit');
-    // bookmarkIcon = document.querySelector('.bookmark-icon');
-    // checkIcon = document.querySelector('.check-icon-bookmark');
+    bookmarkIcon = document.querySelector('.bookmark-icon');
+    checkIcon = document.querySelector('.check-icon-bookmark');
 
 
     bookmarkButton.addEventListener('click', function () {
@@ -203,8 +203,8 @@
 
     function checkBookmark() {
         bookmarkButton.classList.toggle('bookmark-icon-checked');
-        // bookmarkIcon.classList.toggle('bookmark-icon-checked');
-        // checkIcon.classList.toggle('check-icon-bookmark-checked');
+        bookmarkIcon.classList.toggle('bookmark-icon-checked');
+        checkIcon.classList.toggle('check-icon-bookmark-checked');
         console.log('de functie werkt');
     }
 

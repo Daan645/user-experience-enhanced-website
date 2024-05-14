@@ -1,16 +1,31 @@
-@font-face {
-    font-family: AvenirRoman;
-    src: url(../font/Avenir-roman.ttf);
-}
+/*@font-face {*/
+/*    font-family: AvenirRoman;*/
+/*    src: url(../font/Avenir-roman.ttf);*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: AvenirMedium;*/
+/*    src: url(../font/Avenir-medium.ttf);*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: AvenirBlack;*/
+/*    src: url(../font/Avenir\ -black.ttf);*/
+/*}*/
 
 @font-face {
-    font-family: AvenirMedium;
-    src: url(../font/Avenir-medium.ttf);
+    font-family: 'avenir_roman_12';
+    src: url('font/avenir_roman_12.otf') format('opentype');
+    /* Andere eigenschappen zoals font-weight en font-style kunnen hier worden gespecificeerd indien nodig */
 }
 
+
 @font-face {
-    font-family: AvenirBlack;
-    src: url(../font/Avenir\ -black.ttf);
+    font-family: 'Avenir';
+    src: url('https://example.com/Avenir.woff2') format('woff2'), /* Modern Browsers */
+    url('https://example.com/Avenir.woff') format('woff'); /* Older Browsers */
+    font-weight: normal;
+    font-style: normal;
 }
 
 
@@ -20,7 +35,7 @@
     --secondary-color: #e30613;
     --tertairy-color: black;
     /*font*/
-    --font-family: AvenirMedium;
+    --font-family: avenir_roman_12;
 ;
     --font-size-h1: 2em;
     --font-size-h2: 1.5em;
@@ -35,6 +50,10 @@
 /*    box-sizing: border-box;*/
 /*    font-family: var(--font-family);*/
 /*}*/
+* {
+    font-family: avenir_roman_12;
+}
+
 body {
     font-family: var(--font-family);
 }
@@ -76,10 +95,12 @@ button:focus:not(:active) {
 /*fonts*/
 h1 {
     font-size: var(--font-size-h1);
+
 }
 
 h2 {
     font-size: var(--font-size-h2);
+
 }
 
 h3 {
